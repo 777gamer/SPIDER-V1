@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#100608">
+<title>Spider V1</title>
+<style>
+:root{--bg:#090709;--panel:#140d11;--panel2:#1d1017;--red:#f12b45;--red2:#8f1028;--muted:#a88f98;--line:#3a1824;--white:#fff4f6}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 75% 0%,#3b0c1b 0,transparent 38%),radial-gradient(ellipse at 0% 80%,#250913 0,transparent 35%),var(--bg);color:var(--white);font:15px/1.5 Inter,system-ui,Segoe UI,Arial,sans-serif;min-height:100vh}
+button,input,textarea,select{font:inherit}button{cursor:pointer}.web{position:fixed;pointer-events:none;opacity:.18;z-index:0;color:#fa526a;font-size:100px;line-height:1}.web:after{content:"╲╱╲╱╲╱";position:absolute;font-size:20px;top:42px;left:14px;transform:rotate(35deg);letter-spacing:5px}.web.one{top:-24px;right:12px}.web.two{bottom:-38px;left:215px;transform:rotate(180deg);font-size:85px}.spider{position:fixed;z-index:2;top:0;right:10%;height:86px;width:2px;background:#7e3345;pointer-events:none}.spider:after{content:"✹";position:absolute;bottom:-15px;left:-10px;color:#ff536b;font-size:20px;text-shadow:0 0 12px #f12b45}
+.layout{display:flex;min-height:100vh;position:relative;z-index:1}.sidebar{width:230px;flex-shrink:0;background:#0e090cdd;border-right:1px solid var(--line);padding:24px 15px;display:flex;flex-direction:column;gap:24px;backdrop-filter:blur(12px)}.brand{display:flex;align-items:center;gap:10px;padding:0 10px}.logo{width:38px;height:38px;border-radius:12px;background:linear-gradient(145deg,#ff5267,#690b20);display:grid;place-items:center;font-size:22px;box-shadow:0 0 24px #e51d3d55}.brand strong{font-size:20px;letter-spacing:1px}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:3px}.nav-label{color:#765965;font-size:10px;letter-spacing:2px;padding:0 12px;margin-bottom:-14px}.nav{display:grid;gap:7px}.nav button{border:1px solid transparent;color:#bba6ae;background:transparent;text-align:left;padding:12px 13px;border-radius:11px;display:flex;gap:12px;align-items:center}.nav button:hover,.nav button.active{background:linear-gradient(100deg,#68132966,#260d18);border-color:#72243a;color:white}.nav button.active{box-shadow:inset 3px 0 #ff3c58}.nav .ico{width:19px;text-align:center;font-size:17px}.side-bottom{margin-top:auto;border:1px solid var(--line);border-radius:14px;padding:13px;color:var(--muted);font-size:12px;background:#160c11}.side-bottom b{color:#ff657b}.main{flex:1;min-width:0;padding:28px clamp(16px,4vw,48px) 60px;max-width:1500px;margin:auto;width:100%}.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:28px}.crumb{color:var(--muted);font-size:13px}.status{border:1px solid #4a202d;background:#1a0d13;border-radius:99px;padding:7px 12px;font-size:11px;color:#ff8a9b}.page{display:none;animation:fade .25s ease}.page.active{display:block}@keyframes fade{from{opacity:.3;transform:translateY(5px)}to{opacity:1;transform:none}}h1{font-size:clamp(30px,5vw,48px);line-height:1.08;margin:0 0 10px;letter-spacing:-1.5px}h1 span{background:linear-gradient(90deg,#ff7889,#e11c40);-webkit-background-clip:text;background-clip:text;color:transparent}.sub{color:var(--muted);margin:0 0 25px}.hero{padding:30px;border:1px solid #592034;border-radius:22px;background:linear-gradient(115deg,#32101d 0%,#1b0c13 55%,#10090d 100%);position:relative;overflow:hidden;box-shadow:0 18px 60px #0006}.hero:after{content:"🕷";position:absolute;right:7%;top:10%;font-size:110px;opacity:.14;transform:rotate(-18deg)}.hero p{color:#d0aeb8;max-width:550px}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.btn{border:1px solid #79263d;background:#28101a;color:white;border-radius:10px;padding:10px 15px}.btn.primary{background:linear-gradient(110deg,#ef3451,#a60e30);border-color:#fa526a;box-shadow:0 7px 22px #c51b3b33}.btn:hover{filter:brightness(1.2)}.section-head{display:flex;justify-content:space-between;align-items:center;margin:28px 0 14px;gap:10px}.section-head h2{font-size:18px;margin:0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}.card{background:linear-gradient(145deg,#1c1017,#100b0e);border:1px solid var(--line);border-radius:16px;padding:18px;min-width:0}.card h3{margin:0 0 6px;font-size:16px}.card p{color:var(--muted);font-size:13px;margin:0 0 14px}.tile-icon{font-size:25px;margin-bottom:12px}.searchbox{display:flex;gap:8px;margin-top:14px;max-width:760px}.searchbox input,.field input,.field textarea,.field select,.chat-input{width:100%;background:#09070a;border:1px solid #4a202d;border-radius:10px;color:white;padding:12px;outline:none}.searchbox input:focus,.field input:focus,.field textarea:focus{border-color:#ed3856}.search-results{margin-top:14px;display:none}.search-results iframe{width:100%;height:520px;border:1px solid var(--line);border-radius:14px;background:white}.hint{font-size:12px;color:#9d828d;margin-top:8px}.chat{display:flex;flex-direction:column;height:390px}.chat-log{flex:1;overflow:auto;display:flex;flex-direction:column;gap:10px;padding:5px 2px 14px}.bubble{max-width:85%;padding:11px 13px;border-radius:13px;background:#24121b;border:1px solid #4b2030;color:#f6dce3;font-size:13px;white-space:pre-wrap}.bubble.me{align-self:flex-end;background:#74172f;border-color:#a52a47}.chat-send{display:flex;gap:8px}.chat-send input{flex:1}.app-card{display:flex;align-items:center;gap:13px}.app-icon{width:43px;height:43px;flex-shrink:0;border-radius:13px;background:linear-gradient(145deg,#6c172d,#211018);display:grid;place-items:center;font-size:21px}.app-card .btn{margin-left:auto;padding:8px 11px}.empty{border:1px dashed #673044;border-radius:15px;padding:28px;text-align:center;color:var(--muted)}.field{display:grid;gap:6px;margin:12px 0}.field label{font-size:12px;color:#c5a9b3}.field textarea{min-height:75px;resize:vertical}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.game-frame{border:1px solid #602239;background:#100a0e;border-radius:18px;padding:16px}.game-hud{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}.stat{background:#210e17;border:1px solid #512034;border-radius:10px;padding:8px 12px;font-size:13px}.stat b{color:#ff657d}.arena{height:370px;position:relative;overflow:hidden;border-radius:12px;background:radial-gradient(circle at 50% 45%,#371321,#10090d 70%);border:1px solid #512034;touch-action:manipulation}.arena:before{content:"";position:absolute;inset:0;background-image:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:35px 35px}.zombie{position:absolute;border:0;background:transparent;font-size:35px;filter:drop-shadow(0 0 7px #d62847);transform:translate(-50%,-50%);animation:rise .35s ease}.zombie:active{transform:translate(-50%,-50%) scale(.8)}@keyframes rise{from{scale:.2;opacity:0}to{scale:1;opacity:1}}.arena-msg{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#d8aeba;pointer-events:none}.arena-msg strong{display:block;color:white;font-size:22px}.shop{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:13px}.upgrade{background:#1b0e15;border:1px solid #492031;border-radius:12px;padding:12px}.upgrade p{font-size:12px;color:var(--muted);margin:5px 0 10px}.upgrade button{width:100%}.muted{color:var(--muted)}.danger{color:#ff8293}.footer-note{color:#765965;font-size:11px;margin-top:24px}
+@media(max-width:760px){.sidebar{width:68px;padding:18px 8px;align-items:center}.brand{padding:0}.brand>div:last-child,.nav-label,.nav button .nav-text,.side-bottom{display:none}.nav{width:100%}.nav button{justify-content:center;padding:12px 0}.main{padding:20px 14px 45px}.topbar{margin-bottom:20px}.hero{padding:22px}.form-row{grid-template-columns:1fr}.arena{height:320px}}
+</style>
+</head>
+<body>
+<div class="web one">╱</div><div class="web two">╱</div><div class="spider"></div>
+<div class="layout">
+<aside class="sidebar">
+ <div class="brand"><div class="logo">🕷</div><div><strong>SPIDER V1</strong><small>YOUR DIGITAL WEB</small></div></div>
+ <div class="nav-label">WORKSPACE</div>
+ <nav class="nav" id="nav">
+  <button class="active" data-page="home"><span class="ico">⌂</span><span class="nav-text">Home</span></button>
+  <button data-page="games"><span class="ico">🎮</span><span class="nav-text">Games</span></button>
+  <button data-page="apps"><span class="ico">▦</span><span class="nav-text">Apps</span></button>
+  <button data-page="ai"><span class="ico">✧</span><span class="nav-text">Spider AI</span></button>
+  <button data-page="settings"><span class="ico">⚙</span><span class="nav-text">Settings</span></button>
+ </nav>
+ <div class="side-bottom">The web is yours.<br><b>SPIDER V1</b> · Build 001</div>
+</aside>
+<main class="main">
+ <div class="topbar"><div class="crumb" id="crumb">WORKSPACE / HOME</div><div class="status">● SYSTEM ONLINE</div></div>
+ <section class="page active" id="page-home">
+  <div class="hero"><div class="status">WELCOME TO THE WEB</div><h1>Enter the <span>Spider-Verse.</span></h1><p>Your games, apps, search, and AI tools — all in one dark corner of the internet. Make yourself at home.</p><div class="hero-actions"><button class="btn primary" onclick="showPage('games')">Explore games →</button><button class="btn" onclick="showPage('apps')">Open apps</button></div></div>
+  <div class="section-head"><h2>Google Search</h2><span class="muted">SEARCH THE WEB</span></div>
+  <div class="card"><form class="searchbox" id="googleForm"><input id="googleQuery" placeholder="Search Google..." autocomplete="off"><button class="btn primary">Search</button></form><div class="hint">Search opens Google results in a new tab. Google does not permit its full search page to be embedded inside most websites.</div></div>
+  <div class="section-head"><h2>Quick access</h2><span class="muted">YOUR DASHBOARD</span></div>
+  <div class="grid">
+   <div class="card"><div class="tile-icon">🧟</div><h3>Zombie Slayer</h3><p>Fight waves of zombies and spend points on upgrades.</p><button class="btn" onclick="showPage('games');setTimeout(()=>document.getElementById('zombieCard').scrollIntoView({behavior:'smooth'}),50)">Play now</button></div>
+   <div class="card"><div class="tile-icon">✧</div><h3>Spider AI</h3><p>Ask the built-in assistant for ideas and help.</p><button class="btn" onclick="showPage('ai')">Chat with AI</button></div>
+   <div class="card"><div class="tile-icon">⚙</div><h3>Customize</h3><p>Add your own game links to your personal library.</p><button class="btn" onclick="showPage('settings')">Open settings</button></div>
+  </div>
+ </section>
+ <section class="page" id="page-games">
+  <h1>Your <span>Games.</span></h1><p class="sub">Your personal game library, plus the built-in Spider V1 original.</p>
+  <div class="section-head"><h2>Featured game</h2><span class="status">BUILT IN</span></div>
+  <div class="game-frame" id="zombieCard">
+   <div class="game-hud"><div class="stat">❤️ Health: <b id="health">100</b></div><div class="stat">☠ Kills: <b id="kills">0</b></div><div class="stat">✦ Points: <b id="points">0</b></div><div class="stat">⚔ Damage: <b id="damage">1</b></div></div>
+   <div class="arena" id="arena"><div class="arena-msg" id="arenaMsg"><div><strong>ZOMBIE SLAYER</strong>Press Start, then tap the zombies before they escape!</div></div></div>
+   <div class="hero-actions"><button class="btn primary" id="startGame">Start / Restart</button><button class="btn" id="pauseGame">Pause</button><span class="hint">Tap a zombie to attack it. Each hit earns points.</span></div>
+   <div class="section-head"><h2>Upgrade shop</h2><span class="muted">SPEND YOUR POINTS</span></div>
+   <div class="shop">
+    <div class="upgrade"><b>⚔ Stronger hits</b><p>Increase damage by 1.</p><button class="btn" id="buyDamage">Upgrade · 20 pts</button></div>
+    <div class="upgrade"><b>❤️ Health boost</b><p>Restore 25 health (up to 100).</p><button class="btn" id="buyHealth">Restore · 15 pts</button></div>
+    <div class="upgrade"><b>⚡ Quick attacks</b><p>Earn 2 extra points per zombie hit.</p><button class="btn" id="buyBonus">Upgrade · 35 pts</button></div>
+   </div>
+  </div>
+  <div class="section-head"><h2>My games</h2><button class="btn" onclick="showPage('settings')">＋ Add a game</button></div>
+  <div id="gameList" class="grid"></div>
+ </section>
+ <section class="page" id="page-apps">
+  <h1>Your <span>Apps.</span></h1><p class="sub">Launch your favorite platforms from one place.</p>
+  <div class="grid" id="appList"></div>
+  <p class="hint">Some services restrict in-page embedding, so app links open the official site in a new tab.</p>
+ </section>
+ <section class="page" id="page-ai">
+  <h1>Spider <span>AI.</span></h1><p class="sub">A built-in assistant panel for quick ideas and help.</p>
+  <div class="card chat"><div class="chat-log" id="chatLog"><div class="bubble">Hey! I'm Spider AI. Ask me for game ideas, help organizing your site, or a quick explanation. This demo assistant runs locally and isn't connected to a live AI model.</div></div><form class="chat-send" id="chatForm"><input class="chat-input" id="chatInput" placeholder="Message Spider AI..." autocomplete="off"><button class="btn primary">Send</button></form></div>
+  <p class="hint">For live AI responses, connect a trusted AI provider through a secure backend. Never put a private API key in this public website.</p>
+ </section>
+ <section class="page" id="page-settings">
+  <h1>Site <span>Settings.</span></h1><p class="sub">Add games manually. They'll appear automatically in the Games tab.</p>
+  <div class="card">
+   <h2 style="margin-top:0">＋ Add a game</h2>
+   <form id="addGameForm">
+    <div class="field"><label for="gameName">Game name</label><input id="gameName" required maxlength="45" placeholder="Example: Retro Racer"></div>
+    <div class="field"><label for="gameUrl">Game URL</label><input id="gameUrl" required type="url" placeholder="https://example.com/game"></div>
+    <div class="field"><label for="gameDesc">Description (optional)</label><textarea id="gameDesc" maxlength="140" placeholder="A short description..."></textarea></div>
+    <button class="btn primary">Add to Games</button>
+   </form>
+  </div>
+  <div class="section-head"><h2>Manage added games</h2></div><div id="manageList"></div>
+  <div class="section-head"><h2>About</h2></div><div class="card"><b>Spider V1</b><p class="muted">Black and crimson interface · Local game library · Zombie Slayer</p><button class="btn" id="resetGames">Remove all added games</button></div>
+ </section>
+ <div class="footer-note">SPIDER V1 · MADE FOR YOUR OWN CORNER OF THE WEB</div>
+</main>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const defaultApps=[
+ {name:"TikTok",icon:"♪",desc:"Short videos and creative edits.",url:"https://www.tiktok.com/"},
+ {name:"Discord",icon:"◉",desc:"Communities, chats, and voice.",url:"https://discord.com/app"},
+ {name:"YouTube",icon:"▶",desc:"Videos, music, and creators.",url:"https://www.youtube.com/"},
+ {name:"Twitch",icon:"▣",desc:"Live streams and gaming.",url:"https://www.twitch.tv/"},
+ {name:"Spotify",icon:"♫",desc:"Music and podcasts.",url:"https://open.spotify.com/"},
+ {name:"Reddit",icon:"⌕",desc:"Communities and discussions.",url:"https://www.reddit.com/"}
+];
+let games=[];try{games=JSON.parse(localStorage.getItem("spiderV1Games")||"[]")}catch(e){games=[]}
+function saveGames(){localStorage.setItem("spiderV1Games",JSON.stringify(games));renderGames()}
+function showPage(name){document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));$("page-"+name).classList.add("active");document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===name));$("crumb").textContent="WORKSPACE / "+name.toUpperCase();window.scrollTo({top:0,behavior:"smooth"})}
+$("nav").addEventListener("click",e=>{const b=e.target.closest("button[data-page]");if(b)showPage(b.dataset.page)});
+$("googleForm").addEventListener("submit",e=>{e.preventDefault();const q=$("googleQuery").value.trim();if(q)window.open("https://www.google.com/search?q="+encodeURIComponent(q),"_blank","noopener")});
+$("addGameForm").addEventListener("submit",e=>{e.preventDefault();const name=$("gameName").value.trim(),url=$("gameUrl").value.trim();try{const parsed=new URL(url);if(!["http:","https:"].includes(parsed.protocol))throw 0;games.push({id:Date.now(),name,url:parsed.href,desc:$("gameDesc").value.trim()});saveGames();e.target.reset();}catch(err){alert("Please enter a valid http or https game URL.")}});
+function renderGames(){
+ $("gameList").innerHTML=games.length?games.map(g=>`<div class="card"><div class="tile-icon">🎮</div><h3>${escapeHTML(g.name)}</h3><p>${escapeHTML(g.desc||"Your custom game.")}</p><a class="btn" href="${escapeAttr(g.url)}" target="_blank" rel="noopener">Launch game ↗</a></div>`).join(""):`<div class="empty">No custom games yet.<br>Go to Settings to add your first game.</div>`;
+ $("manageList").innerHTML=games.length?games.map(g=>`<div class="card" style="display:flex;align-items:center;gap:12px;margin-bottom:9px"><div style="flex:1;min-width:0"><b>${escapeHTML(g.name)}</b><div class="hint">${escapeHTML(g.url)}</div></div><button class="btn" onclick="removeGame(${g.id})">Remove</button></div>`).join(""):`<div class="empty">Your added games will show up here.</div>`;
+}
+function removeGame(id){games=games.filter(g=>g.id!==id);saveGames()}
+$("resetGames").onclick=()=>{if(confirm("Remove all games you added?")){games=[];saveGames()}};
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function escapeAttr(s){return escapeHTML(s)}
+$("appList").innerHTML=defaultApps.map(a=>`<div class="card app-card"><div class="app-icon">${a.icon}</div><div style="min-width:0"><h3>${a.name}</h3><p style="margin:0">${a.desc}</p></div><a class="btn" href="${a.url}" target="_blank" rel="noopener">Open ↗</a></div>`).join("");
+renderGames();
+// Local demo assistant: helpful navigation and site-specific answers, with honest limitations.
+$("chatForm").addEventListener("submit",e=>{e.preventDefault();const input=$("chatInput"),q=input.value.trim();if(!q)return;addBubble(q,true);input.value="";const l=q.toLowerCase();let answer;
+if(/hello|hi\b|hey/.test(l))answer="Hey! What are we building today? I can explain Spider V1's features or help you organize your game library.";
+else if(l.includes("add")&&l.includes("game"))answer="Open Settings in the sidebar, enter a game name and its https:// link, then press Add to Games. It will appear in the Games tab and stay saved in this browser.";
+else if(l.includes("zombie")||l.includes("slayer"))answer="Open Games → Zombie Slayer. Press Start, then tap the zombies in the arena to earn points. Spend points in the upgrade shop.";
+else if(l.includes("apps"))answer="The Apps tab has quick links for TikTok, Discord, YouTube, Twitch, Spotify, and Reddit. They open in a new tab.";
+else if(l.includes("google")||l.includes("search"))answer="Use the Google Search box on Home. Search opens Google's results in a new tab because Google blocks most embedded search frames.";
+else if(l.includes("ai")||l.includes("live model"))answer="This version includes a local demo assistant, not a live AI model. A live assistant needs a provider API connected through a secure server so your secret key stays private.";
+else answer="I can help with Spider V1 navigation, adding games, the Zombie Slayer game, and the Apps section. For open-ended AI answers, this demo needs a secure connection to a live AI service.";
+setTimeout(()=>addBubble(answer,false),180)});
+function addBubble(text,me){const b=document.createElement("div");b.className="bubble"+(me?" me":"");b.textContent=text;$("chatLog").appendChild(b);$("chatLog").scrollTop=$("chatLog").scrollHeight}
+// Zombie Slayer
+let z={health:100,kills:0,points:0,damage:1,bonus:0,running:false,spawn:null};
+function updateHUD(){$("health").textContent=z.health;$("kills").textContent=z.kills;$("points").textContent=z.points;$("damage").textContent=z.damage}
+function startZ(){clearInterval(z.spawn);z.health=100;z.kills=0;z.points=0;z.damage=1;z.bonus=0;z.running=true;$("arena").querySelectorAll(".zombie").forEach(n=>n.remove());$("arenaMsg").style.display="none";updateHUD();z.spawn=setInterval(spawnZombie,1150)}
+function pauseZ(){z.running=false;clearInterval(z.spawn);$("arenaMsg").style.display="grid";$("arenaMsg").innerHTML="<div><strong>PAUSED</strong>Press Start / Restart to play again.</div>"}
+function spawnZombie(){if(!z.running)return;const a=$("arena"),el=document.createElement("button");el.className="zombie";el.textContent="🧟";el.setAttribute("aria-label","Attack zombie");el.style.left=(8+Math.random()*84)+"%";el.style.top=(12+Math.random()*76)+"%";el.onclick=()=>{if(!z.running)return;el.remove();z.kills++;z.points+=5+z.bonus;updateHUD();};a.appendChild(el);setTimeout(()=>{if(el.isConnected&&z.running){el.remove();z.health=Math.max(0,z.health-10);updateHUD();if(z.health===0){pauseZ();$("arenaMsg").innerHTML="<div><strong class='danger'>GAME OVER</strong>You got "+z.kills+" kills and "+z.points+" points.<br>Press Start / Restart to try again.</div>"}}},4200)}
+$("startGame").onclick=startZ;$("pauseGame").onclick=pauseZ;
+$("buyDamage").onclick=()=>{if(z.points<20)return alert("You need 20 points.");z.points-=20;z.damage++;z.bonus+=1;updateHUD()};
+$("buyHealth").onclick=()=>{if(z.points<15)return alert("You need 15 points.");if(z.health>=100)return alert("Your health is already full.");z.points-=15;z.health=Math.min(100,z.health+25);updateHUD()};
+$("buyBonus").onclick=()=>{if(z.points<35)return alert("You need 35 points.");z.points-=35;z.bonus+=2;updateHUD()};
+updateHUD();
+</script>
+</body>
+</html>
